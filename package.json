@@ -1,5 +1,5 @@
 {
-  "name": "fb-github-repos-viewer",
+  "name": "fb-repos-viewer",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -9,7 +9,9 @@
     "react-scripts": "^1.0.17"
   },
   "dependencies": {
+    "bootstrap": "^4.0.0",
     "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
