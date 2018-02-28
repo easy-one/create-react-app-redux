@@ -1,15 +1,22 @@
 ## Installation
 
+- Prerequisites: install Node.js, https://nodejs.org/en/download/  
+- Clone git repository
 ```bash
-git clone https://github.com/notrab/fb-repos-viewer.git
+git clone https://github.com/notrab/fb-repos-viewer.git 
+```
+- Go to project directory
+```bash
 cd fb-repos-viewer
-yarn    # or npm i
+```
+- Install dependencies
+```bash
+npm i   # also works with yarn
 ```
 
-## Get started
+- Start the project
 
 ```bash
-yarn start    # or npm start
+npm start
 ```
-
-Both yarn and npm should work well
+In a moment default browser should automatically open http://localhost:3000

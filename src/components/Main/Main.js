@@ -16,10 +16,11 @@ class Main extends React.Component {
   }
 
   getRepos() {
-    const apiUrl = 'https://api.github.com/users/facebook/repos?type=all&sort=wathers';
+    const apiUrl = 'https://api.github.com/users/facebook/repos?type=all';
     return fetch(apiUrl)
     .then(response => response.json())
     .then(repos => {
+      repos.sort((a, b) => b.watchers - a.watchers);   // sort by watchers count descending
       this.setState({
         repos: repos,
         activeRepoIndex: this.findRepoByName(repos, this.props && this.props.match.params.repoName)
@@ -37,6 +38,7 @@ class Main extends React.Component {
         alert('The repo you link to does not exist');
       }
     }
+    // in case repoName is not valid, take the topmost repo
     if (repos.length) {
       repoName = repos[0].name;
       window.history.pushState(null, null, '/' + repoName);
