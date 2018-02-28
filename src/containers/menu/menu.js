@@ -1,9 +1,15 @@
 import React from 'react';
-
+import {BrowserRouter as Router, Link} from 'react-router-dom';
+import { getRepos } from "src/modules/misc";
 
 class Menu extends React.Component {
+  componentDidMount() {
+    getRepos();
+  }
+
   render() {
     return (
+      <Router>
       <div className="container-fluid">
         <div className="row">
           <div className="col-4 col-sm-3 col-lg-2">
@@ -12,9 +18,11 @@ class Menu extends React.Component {
                 <span className="navbar-toggler-icon"></span>
               </button>
               <div className="navbar-collapse collapse show width flex-column pt-2" id="navbar">
-                <a href="" className="nav-link">Linnk</a>
-                <a href="" className="nav-link">Linnk</a>
-                <a href="" className="nav-link">Linnk</a>
+                {
+                  repos.map((repo) => {
+                    return <Link to={repo.name} className="nav-link">{repo.name}</Link>;
+                  })
+                }
               </div>
             </nav>
           </div>
@@ -22,6 +30,7 @@ class Menu extends React.Component {
           </div>
         </div>
       </div>
+      </Router>
     );
   }
 }
