@@ -16,7 +16,7 @@ class Main extends React.Component {
   }
 
   getRepos() {
-    const apiUrl = 'https://api.github.com/users/facebook/repos?type=all&sort=name';
+    const apiUrl = 'https://api.github.com/users/facebook/repos?type=all&sort=wathers';
     return fetch(apiUrl)
     .then(response => response.json())
     .then(repos => {
