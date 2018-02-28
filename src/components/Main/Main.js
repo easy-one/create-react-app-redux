@@ -7,7 +7,7 @@ import RepoDetails from '../RepoDetails/RepoDetails';
 class Main extends React.Component {
   state = {
     repos: null,
-    activeRepoIndex: 0
+    activeRepoIndex: null
   };
 
   constructor() {
@@ -34,10 +34,15 @@ class Main extends React.Component {
         return repos.indexOf(found);
       }
       else {
-        alert('The repo you link to does not exist any more');
+        alert('The repo you link to does not exist');
       }
     }
-    return 0;
+    if (repos.length) {
+      repoName = repos[0].name;
+      window.history.pushState(null, null, '/' + repoName);
+      return 0;
+    }
+    return null;
   }
 
   changeActiveRepo(activeRepoIndex) {

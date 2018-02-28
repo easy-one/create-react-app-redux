@@ -28,7 +28,9 @@ class RepoDetails extends React.Component {
       <div className="pt-2 mt-5 mt-sm-0">
         <h3>{this.props.repo.name} details</h3>
         <table className="table table-striped">
-          {this.renderDetails()}
+          <tbody>
+            {this.renderDetails()}
+          </tbody>
         </table>
       </div>
     )
