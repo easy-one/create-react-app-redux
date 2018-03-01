@@ -8,6 +8,8 @@ const renderDetailsList = (repo) => {
     'open_issues': 'Open issues count',
     'watchers': 'Watchers count',
     'language': 'Language',
+    'homepage': 'Homepage',
+    'updated_at': 'Updated at'
     // and so on
   };
 

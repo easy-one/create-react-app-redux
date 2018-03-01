@@ -7,7 +7,7 @@ import RepoDetails from '../RepoDetails/RepoDetails';
 class Main extends React.Component {
   state = {
     repos: null,
-    activeRepoIndex: 0
+    activeRepo: null
   };
 
   constructor() {
@@ -23,7 +23,7 @@ class Main extends React.Component {
       repos.sort((a, b) => b.watchers - a.watchers);   // sort by watchers count descending
       this.setState({
         repos: repos,
-        activeRepoIndex: this.findRepoByName(repos, this.props && this.props.match.params.repoName)
+        activeRepo: this.findRepoByName(repos, this.props && this.props.match.params.repoName)
       });
     });
   };
@@ -32,7 +32,7 @@ class Main extends React.Component {
     if (repoName) {
       const found = repos.find(repo => repo.name === repoName);
       if (found) {
-        return repos.indexOf(found);
+        return found;
       }
       else {
         alert(`Facebook does not have ${repoName} repo`);
@@ -42,14 +42,15 @@ class Main extends React.Component {
     if (repos.length) {
       repoName = repos[0].name;
       window.history.pushState(null, null, '/' + repoName);
+      return repos[0];
     }
-    return 0;
+    return null;
   }
 
-  changeActiveRepo(activeRepoIndex) {
+  changeActiveRepo(activeRepo) {
     this.setState({
       ...this.state,
-      activeRepoIndex: activeRepoIndex
+      activeRepo: activeRepo
     })
   }
 
@@ -66,12 +67,12 @@ class Main extends React.Component {
           <div className="col-7 col-sm-5 col-lg-4 col-xl-3" id="sidebar">
             <Sidebar
               repos={this.state.repos}
-              activeRepoIndex={this.state.activeRepoIndex}
-              changeActiveRepo={index => this.changeActiveRepo(index)} />
+              activeRepo={this.state.activeRepo}
+              changeActiveRepo={repo => this.changeActiveRepo(repo)} />
           </div>
           <div className="col-12 col-sm-7 col-lg-8 col-xl-9">
             <RepoDetails
-              repo={this.state.repos[this.state.activeRepoIndex]} />
+              repo={this.state.activeRepo} />
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@ const Sidebar = (props) => {
       <div className="navbar-collapse collapse show fast-transition flex-column pt-2 mt-5 mt-sm-0" id="navbar">
         <ReposList
           repos={props.repos}
-          activeRepoIndex={props.activeRepoIndex}
+          activeRepo={props.activeRepo}
           changeActiveRepo={props.changeActiveRepo} />
       </div>
     </nav>
