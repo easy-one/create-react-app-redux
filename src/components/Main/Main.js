@@ -1,13 +1,13 @@
 import React from 'react';
 import fetch from "cross-fetch";
-import ReposList from '../ReposLIst/ReposList';
+import Sidebar from '../Sidebar/Sidebar';
 import RepoDetails from '../RepoDetails/RepoDetails';
 
 
 class Main extends React.Component {
   state = {
     repos: null,
-    activeRepoIndex: null
+    activeRepoIndex: 0
   };
 
   constructor() {
@@ -35,16 +35,15 @@ class Main extends React.Component {
         return repos.indexOf(found);
       }
       else {
-        alert('The repo you link to does not exist');
+        alert(`Facebook does not have ${repoName} repo`);
       }
     }
     // in case repoName is not valid, take the topmost repo
     if (repos.length) {
       repoName = repos[0].name;
       window.history.pushState(null, null, '/' + repoName);
-      return 0;
     }
-    return null;
+    return 0;
   }
 
   changeActiveRepo(activeRepoIndex) {
@@ -55,21 +54,24 @@ class Main extends React.Component {
   }
 
   render() {
+    if (!this.state.repos) {
+      return <i>Loading...</i>
+    }
+    if (this.state.repos.length === 0) {
+      return <i>Strange, but Facebook has no public repos on Github...</i>
+    }
     return (
       <div className="container-fluid">
         <div className="row">
           <div className="col-7 col-sm-5 col-lg-4 col-xl-3" id="sidebar">
-            <ReposList
+            <Sidebar
               repos={this.state.repos}
               activeRepoIndex={this.state.activeRepoIndex}
-              onClick={index => this.changeActiveRepo(index)} />
+              changeActiveRepo={index => this.changeActiveRepo(index)} />
           </div>
           <div className="col-12 col-sm-7 col-lg-8 col-xl-9">
-            {this.state.repos && this.state.repos.length ?
-              <RepoDetails
-                repo={this.state.repos[this.state.activeRepoIndex]} />
-              : null
-            }
+            <RepoDetails
+              repo={this.state.repos[this.state.activeRepoIndex]} />
           </div>
         </div>
       </div>
