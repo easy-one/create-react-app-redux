@@ -1,17 +1,32 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {setActiveRepo} from '../../actions/setActiveRepo'
 
 const ReposList = (props) => {
-  return props.repos.map(repo => {
+  return props.reposList.map(repo => {
     const activeClass = (repo === props.activeRepo) ? ' active' : '';
     return <Link
-      key={repo.name}
       to={repo.name}
-      onClick={() => props.changeActiveRepo(repo)}
+      key={repo.name}
+      onClick={() => props.setActiveRepo(repo)}
       className={'nav-link pl-0 pr-0' + activeClass}>
         {repo.name}
       </Link>;
   })
 };
 
-export default ReposList;
+const mapStateToProps = state => ({
+  reposList: state.repos.reposList,
+  activeRepo: state.repos.activeRepo
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({
+      setActiveRepo
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReposList);

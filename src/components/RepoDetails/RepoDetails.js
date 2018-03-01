@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 const renderDetailsList = (repo) => {
   const detailsToShow = {
@@ -10,15 +11,15 @@ const renderDetailsList = (repo) => {
     'language': 'Language',
     'homepage': 'Homepage',
     'updated_at': 'Updated at'
-    // and so on
+    // desired details whitelist
   };
 
-  return Object.entries(detailsToShow)
-  .map(([key, title]) => {
-    const detailData = repo[key];
+  return Object.entries(detailsToShow)      // transform hash table into key-value pairs
+  .map(([detailKey, detailName]) => {
+    const detailData = repo[detailKey];
     return (
-      <tr key={key}>
-        <td>{title}</td>
+      <tr key={detailKey}>
+        <td>{detailName}</td>
         <td>{detailData}</td>
       </tr>
     )
@@ -28,14 +29,18 @@ const renderDetailsList = (repo) => {
 const RepoDetails = (props) => {
   return (
     <div className="pt-2 mt-5 mt-sm-0">
-      <h3>{props.repo.name} details</h3>
+      <h3>{props.activeRepo.name} details</h3>
       <table className="table table-striped">
         <tbody>
-          {renderDetailsList(props.repo)}
+          {renderDetailsList(props.activeRepo)}
         </tbody>
       </table>
     </div>
   )
 };
 
-export default RepoDetails;
+const mapStateToProps = state => ({
+  activeRepo: state.repos.activeRepo
+});
+
+export default connect(mapStateToProps)(RepoDetails);

@@ -1,0 +1,1 @@
+export const getReposListUrl = 'https://api.github.com/users/facebook/repos?type=all';
