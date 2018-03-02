@@ -3,7 +3,7 @@
 - Prerequisites: install Node.js, https://nodejs.org/en/download/  
 - Clone git repository
 ```bash
-git clone https://github.com/notrab/fb-repos-viewer.git 
+git clone https://github.com/easy-one/fb-repos-viewer.git 
 ```
 - Go to project directory
 ```bash

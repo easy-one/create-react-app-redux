@@ -10,13 +10,13 @@ const reposReducer = (state = initialState, action) => {
     case SET_REPOS_LIST:
       return {
         ...state,
-        reposList: action.payload
+        reposList: action.reposList
       };
 
     case SET_ACTIVE_REPO:
       return {
         ...state,
-        activeRepo: action.payload
+        activeRepo: action.activeRepo
       };
 
     default:

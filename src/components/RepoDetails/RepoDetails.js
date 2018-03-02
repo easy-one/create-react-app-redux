@@ -26,13 +26,13 @@ const renderDetailsList = (repo) => {
   })
 };
 
-const RepoDetails = (props) => {
+const RepoDetails = ({activeRepo}) => {
   return (
     <div className="pt-2 mt-5 mt-sm-0">
-      <h3>{props.activeRepo.name} details</h3>
+      <h3>{activeRepo.name} details</h3>
       <table className="table table-striped">
         <tbody>
-          {renderDetailsList(props.activeRepo)}
+          {renderDetailsList(activeRepo)}
         </tbody>
       </table>
     </div>

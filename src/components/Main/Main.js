@@ -2,22 +2,13 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {getReposFromApi, findRepoByName} from '../../utils/getReposFromApi'
 import {setReposList} from '../../actions/setReposList';
-import {setActiveRepo} from '../../actions/setActiveRepo';
 import Sidebar from '../Sidebar/Sidebar';
 import RepoDetails from '../RepoDetails/RepoDetails';
 
 class Main extends React.Component {
-  constructor() {
-    super();
-    getReposFromApi()
-    .then(reposList => {
-      const activeRepo = findRepoByName(reposList, this.props && this.props.match.params.repoName);
-      this.props.setActiveRepo(activeRepo);
-      this.props.history.push('/' + activeRepo.name); // router v4 doesn't support setting route inside an action
-      this.props.setReposList(reposList);
-    });
+  componentDidMount() {
+    this.props.setReposList(this.props.match.params.repoName);
   }
 
   render() {
@@ -49,8 +40,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
-      setReposList,
-      setActiveRepo
+      setReposList
     },
     dispatch
   );
